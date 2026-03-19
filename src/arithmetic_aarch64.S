@@ -45,7 +45,7 @@
 
 .macro load_mod1 reg
     movz \reg, #0xffff
-    movk \reg, #0x53ff, lsl #16
+    movk \reg, #0xb153, lsl #16
     movk \reg, #0xfffe, lsl #32
     movk \reg, #0x1eab, lsl #48
 .endm
