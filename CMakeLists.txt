@@ -18,6 +18,9 @@ target_compile_features(bls12-381 PUBLIC cxx_std_20)
 if(CMAKE_SYSTEM_PROCESSOR STREQUAL x86_64)
   target_sources(bls12-381 PRIVATE src/arithmetic.s)
   set_source_files_properties(src/arithmetic.s PROPERTIES COMPILE_FLAGS "-Wno-unused-command-line-argument")
+elseif(CMAKE_SYSTEM_PROCESSOR STREQUAL aarch64 OR CMAKE_SYSTEM_PROCESSOR STREQUAL arm64)
+  target_sources(bls12-381 PRIVATE src/arithmetic_aarch64.S)
+  set_source_files_properties(src/arithmetic_aarch64.S PROPERTIES COMPILE_FLAGS "-Wno-unused-command-line-argument")
 endif()
 
 # the tests

@@ -8,7 +8,7 @@ using namespace std;
 namespace bls12_381
 {
 
-#ifndef __x86_64__
+#if !defined(__x86_64__) && !defined(__aarch64__)
 void _add(fp* z, const fp* x, const fp* y)
 {
     uint64_t carry, _;
@@ -115,7 +115,7 @@ void _lsubtract(fp* z, const fp* x, const fp* y)
 }
 #endif
 
-#ifdef __x86_64__
+#if defined(__x86_64__) || defined(__aarch64__)
 void __negate(fp* z, const fp* x);
 void _negate(fp* z, const fp* x)
 {
@@ -144,7 +144,7 @@ void _negate(fp* z, const fp* x)
 }
 #endif
 
-#ifdef __x86_64__
+#if defined(__x86_64__)
 void __multiply(fp* z, const fp* x, const fp* y);
 void __mul_ex(fp* z, const fp* x, const fp* y);
 
@@ -193,7 +193,7 @@ struct bls_mul_init {
 static bls_mul_init the_bls_mul_init;
 
 #endif //__ELF__
-#else
+#elif !defined(__aarch64__)
 void _multiply(fp* z, const fp* x, const fp* y)
 {
     array<uint64_t, 6> t;
@@ -316,10 +316,15 @@ void _multiply(fp* z, const fp* x, const fp* y)
 }
 #endif
 
-#ifdef __x86_64__
+#if defined(__x86_64__)
 void _square(fp* z, const fp* x)
 {
     __multiply(z, x, x);
+}
+#elif defined(__aarch64__)
+void _square(fp* z, const fp* x)
+{
+    _multiply(z, x, x);
 }
 #else
 void _square(fp* z, const fp* x)

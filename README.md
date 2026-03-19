@@ -6,7 +6,7 @@ A high-performance C++20 implementation of BLS (Boneh-Lynn-Shacham) signatures o
 
 ## Features
 
-- **Optimized field arithmetic** -- x86_64 assembly fast path with pure C++ fallback for other architectures (ARM64, WASM, etc.)
+- **Optimized field arithmetic** -- x86_64 and ARM64 assembly fast paths with pure C++ fallback for other architectures (WASM, etc.)
 - **G1/G2 point arithmetic and pairing** -- addition, scalar multiplication, optimal Ate pairing
 - **BLS signatures** -- sign, verify, aggregate signatures, aggregate verification
 - **Proof of Possession (PoP)** -- prove, verify, fast aggregate verify
@@ -19,9 +19,9 @@ A high-performance C++20 implementation of BLS (Boneh-Lynn-Shacham) signatures o
 
 | Architecture | Arithmetic | Status |
 |---|---|---|
-| x86_64 (Linux, macOS) | Assembly fast path (with BMI2/ADX auto-detection) | Primary, CI-tested |
-| ARM64/AArch64 (Linux) | C++ fallback | CI-tested |
-| macOS (Apple Silicon) | C++ fallback | CI-tested (via macos-latest) |
+| x86_64 (Linux, macOS) | Assembly fast path (with BMI2/ADX auto-detection) | CI-tested |
+| ARM64/AArch64 (Linux) | Assembly fast path (fused CIOS Montgomery) | CI-tested |
+| macOS (Apple Silicon) | Assembly fast path (fused CIOS Montgomery) | CI-tested (via macos-latest) |
 | WASM | C++ fallback | Supported |
 | Other | C++ fallback | Should work, not CI-tested |
 
