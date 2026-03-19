@@ -15,9 +15,19 @@ A high-performance C++20 implementation of BLS (Boneh-Lynn-Shacham) signatures o
 - **Zero dependencies** -- self-contained SHA-256, HKDF, and field arithmetic
 - **WASM compatible** -- builds for WebAssembly targets
 
+## Platform support
+
+| Architecture | Arithmetic | Status |
+|---|---|---|
+| x86_64 (Linux, macOS) | Assembly fast path (with BMI2/ADX auto-detection) | Primary, CI-tested |
+| ARM64/AArch64 (Linux) | C++ fallback | CI-tested |
+| macOS (Apple Silicon) | C++ fallback | CI-tested (via macos-latest) |
+| WASM | C++ fallback | Supported |
+| Other | C++ fallback | Should work, not CI-tested |
+
 ## Requirements
 
-- C++20 compiler (GCC 10+, Clang 12+, Apple Clang 13+)
+- C++20 compiler (GCC 11+, Clang 12+, Apple Clang 13+)
 - CMake 3.12+
 - x86_64 assembler (optional -- C++ fallback used on other architectures)
 
@@ -241,10 +251,16 @@ bls12-381/
 
 ## CI
 
-Tested across multiple compilers and configurations:
+Tested across multiple compilers, architectures, and configurations:
+
+**x86_64:**
+- GCC 11 (Ubuntu 22.04), GCC 12 (Debian Bookworm), GCC 13 (Ubuntu 24.04)
+- GCC, Clang, Clang+LTO, Clang+libc++ (Arch Linux)
+- Clang+UBSAN, Clang+ASAN (Arch Linux)
 - macOS (Apple Clang)
-- GCC 10, 11, 12, 13 (Debian/Ubuntu containers)
-- Clang (Arch Linux) with LTO, libc++, UBSAN, and ASAN variants
+
+**ARM64/AArch64:**
+- GCC (Ubuntu 22.04, Ubuntu 24.04)
 
 ## Benchmarks
 
