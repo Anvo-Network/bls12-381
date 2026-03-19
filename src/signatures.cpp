@@ -105,6 +105,8 @@ int hkdf256_expand(
     if(N < 1 || N > 255)
     {
         //throw invalid_argument("assert(N >= 1 && N <= 255)");
+        free(hmacInput1);
+        free(hmacInput);
         return -3;
     }
 
@@ -131,6 +133,8 @@ int hkdf256_expand(
         if(to_write <= 0 || to_write > 32)
         {
             //throw invalid_argument("assert(to_write > 0 && to_write <= 32)");
+            free(hmacInput1);
+            free(hmacInput);
             return -4;
         }
         memcpy(okm + bytesWritten, T.data(), to_write);
@@ -186,6 +190,10 @@ array<uint64_t, 4> secret_key(std::span<const uint8_t> seed)
     uint8_t saltLen = 20;
 
     uint8_t *ikmHkdf = reinterpret_cast<uint8_t*>(malloc(seed.size() + 1));
+    if(ikmHkdf == nullptr)
+    {
+        return {0, 0, 0, 0};
+    }
     memcpy(ikmHkdf, &seed[0], seed.size());
     ikmHkdf[seed.size()] = 0;
 
