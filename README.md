@@ -253,14 +253,16 @@ bls12-381/
 
 Tested across multiple compilers, architectures, and configurations:
 
-**x86_64:**
+**x86_64 (Linux):**
 - GCC 11 (Ubuntu 22.04), GCC 12 (Debian Bookworm), GCC 13 (Ubuntu 24.04)
 - GCC, Clang, Clang+LTO, Clang+libc++ (Arch Linux)
 - Clang+UBSAN, Clang+ASAN (Arch Linux)
-- macOS (Apple Clang)
 
-**ARM64/AArch64:**
+**ARM64/AArch64 (Linux):**
 - GCC (Ubuntu 22.04, Ubuntu 24.04)
+
+**ARM64 (macOS):**
+- Apple Clang (macos-latest / Apple Silicon)
 
 ## Benchmarks
 
