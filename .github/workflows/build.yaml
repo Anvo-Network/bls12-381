@@ -15,10 +15,10 @@ jobs:
       matrix:
         include:
           - cfg: {name: 'macos',             runson: 'macos-latest'}
-          - cfg: {name: 'gcc10',             runson: 'ubuntu-latest', container: 'debian:bullseye'}
           - cfg: {name: 'gcc11',             runson: 'ubuntu-latest', container: 'ubuntu:jammy'}
           - cfg: {name: 'gcc12',             runson: 'ubuntu-latest', container: 'debian:bookworm'}
           - cfg: {name: 'gcc13',             runson: 'ubuntu-latest', container: 'ubuntu:noble'}
+          - cfg: {name: 'gcc-arm64',         runson: 'ubuntu-24.04-arm', container: 'ubuntu:noble'}
           - cfg: {name: 'gcc-arch',          runson: 'ubuntu-latest', container: 'archlinux'}
           - cfg: {name: 'clang-arch',        runson: 'ubuntu-latest', container: 'archlinux',
                   cmake: '-DCMAKE_CXX_COMPILER=clang++'}
